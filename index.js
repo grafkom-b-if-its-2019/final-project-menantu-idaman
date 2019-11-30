@@ -1,7 +1,7 @@
 var scene;
 var stat;
 
-Init();
+// Init();
 
 function Init(){
     scene = new MyScene();
