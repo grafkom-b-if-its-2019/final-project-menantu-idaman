@@ -1,35 +1,24 @@
-var scene;
-var stat;
+var express = require('express');
+var socket =  require('socket.io');
 
-Init();
+// App Setup
+var app = express();
+var port = process.env.PORT || 3000;
 
-function Init(){
-    scene = new MyScene();
-    scene.InitHierarchy();
+var path = require('path');
+var server = require('http').createServer(app);
+server.listen(port,function(){
+    console.log('listening request on port ' + port);
+});
 
-    stat = InitStats();
 
-    Update();
-}
+// Routing
+app.use(express.static(path.join(__dirname, 'public')));
 
-function InitStats() {
+// Socket setup
+var io = socket(server);
+// var io = require('../..')(server);
 
-    var stats = new Stats();
-    stats.setMode(0); // 0: fps, 1: ms
-
-    // Align top-left
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-
-    document.getElementById("Stats-output").appendChild(stats.domElement);
-
-    return stats;
-}
-
-function Update(){
-    scene.Update();
-    stat.update();
-
-    requestAnimationFrame(Update);
-}
+io.on('connection', function(socket){
+    
+});
