@@ -1,13 +1,24 @@
-var express = require("express");
+var express = require('express');
+var socket =  require('socket.io');
+
+// App Setup
 var app = express();
-var server = require("http").createServer(app);
-var io = require("socket.io").listen(server);
-user = [];
-connections = [];
+var port = process.env.PORT || 3000;
 
-server.listen(process.env.PORT || 3000);
-console.log("Server running...");
+var path = require('path');
+var server = require('http').createServer(app);
+server.listen(port,function(){
+    console.log('listening request on port ' + port);
+});
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+
+// Routing
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Socket setup
+var io = socket(server);
+// var io = require('../..')(server);
+
+io.on('connection', function(socket){
+    
 });
