@@ -5,6 +5,7 @@ class Obstacle extends Cube{
         super(data);
         this.speed = data.speed;
         this.name = data.name;
+        this.scene = data.scene;
     }
 
     Update(){
@@ -14,6 +15,14 @@ class Obstacle extends Cube{
 
         this.mesh.position.copy(this.position);
         this.mesh.quaternion.copy(this.body.quaternion);
+
+        if(this.position.z > 5){
+            this.RemoveObject();
+        }
+    }
+
+    RemoveObject(){
+        this.scene.RemoveObject(this.name, this.mesh, this.body);
     }
 
     Move(){

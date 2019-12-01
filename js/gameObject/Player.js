@@ -14,6 +14,7 @@ class Player extends Cube{
     constructor(_data){
         super(_data);
         this.Start();
+        this.scene = _data.scene;
     }
 
     Start(){
@@ -40,7 +41,7 @@ class Player extends Cube{
             obj.onGround = true;
         }
         else{
-            location.reload(false);
+            obj.scene.GameOver();
         }
     }
 
