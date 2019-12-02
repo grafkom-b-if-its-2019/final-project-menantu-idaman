@@ -1,3 +1,5 @@
+var io = require('socket.io')(http);
+
 class Player extends Cube{
     speed = 10;
     xPoint = 2;
@@ -51,7 +53,7 @@ class Player extends Cube{
             obj.scene.GameOver();
         }
     }
-    
+
     Update(){
         if(this.isMoving){
             if(this.moveLeft && this.body.position.x <= (this.playerPos * this.xPoint)){
