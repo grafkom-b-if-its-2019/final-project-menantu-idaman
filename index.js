@@ -22,6 +22,7 @@ var io = socket(server);
 io.on('connection', function(socket){
     console.log("someone connected");
     socket.on("direction", function(msg){
+        socket.broadcast.emit("dir", msg);
         console.log("dir: " + msg);
     });
 });
