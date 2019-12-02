@@ -5,6 +5,7 @@ class MyScene{
     hierarchy = {};
     timeStep = 1/60;
     isGameOver = false;
+    socket = io();
 
     constructor(){
         this.InitScene();
@@ -29,6 +30,9 @@ class MyScene{
         this.sun.castShadow = true;
         this.sun.intensity = 1;
         this.scene.add(this.sun);
+        this.socket.on("dir", function(msg){
+            this.MovePlayer(msg);
+        }.bind(this));
     }
 
     InitWorld(){
@@ -37,6 +41,13 @@ class MyScene{
         this.world.gravity.set(0, -30, 0);
         this.world.broadphase = new CANNON.NaiveBroadphase();
         this.world.solver.iterations = 10;
+    }
+
+    MovePlayer(dir){
+        console.log("called");
+        if(this.hierarchy.Player != undefined){
+            this.hierarchy.Player.Move(dir);
+        }
     }
 
     InitHierarchy() {

@@ -69,6 +69,34 @@ class Player extends Cube{
         this.mesh.quaternion.copy(this.body.quaternion);
     }
 
+    Move(dir){
+        console.log("Move");
+        if(dir == "up"){
+            if(this.onGround){
+                this.body.velocity.y = this.jumpForce;
+                this.onGround = false;
+            }
+        }
+        else if(dir == "left"){
+            if(this.playerPos > -1 && this.isMoving == false){
+                this.playerPos -= 1;
+
+                this.body.velocity.x = this.speed * -1;
+                this.moveLeft = true;
+                this.isMoving = true;
+            }
+        }
+        else if(dir == "right"){
+            if(this.playerPos < 1 && this.isMoving == false){
+                this.playerPos += 1;
+
+                this.body.velocity.x = this.speed;
+                this.moveRight = true;
+                this.isMoving = true;
+            }
+        }
+    }
+
     OnKeyDown(obj, event){
         switch( event.keyCode ) {
 
