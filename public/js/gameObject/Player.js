@@ -70,6 +70,7 @@ class Player extends Cube{
     }
 
     Move(dir){
+        console.log("Move");
         if(dir == "up"){
             if(obj.onGround){
                 obj.body.velocity.y = obj.jumpForce;

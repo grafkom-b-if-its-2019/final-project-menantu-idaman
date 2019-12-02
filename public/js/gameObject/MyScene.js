@@ -44,6 +44,7 @@ class MyScene{
     }
 
     MovePlayer(dir){
+        console.log("called");
         if(this.hierarchy.Player != undefined){
             this.hierarchy.Player.Move(dir);
         }
