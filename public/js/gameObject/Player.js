@@ -72,27 +72,27 @@ class Player extends Cube{
     Move(dir){
         console.log("Move");
         if(dir == "up"){
-            if(obj.onGround){
-                obj.body.velocity.y = obj.jumpForce;
-                obj.onGround = false;
+            if(this.onGround){
+                this.body.velocity.y = this.jumpForce;
+                this.onGround = false;
             }
         }
         else if(dir == "left"){
-            if(obj.playerPos > -1 && obj.isMoving == false){
-                obj.playerPos -= 1;
+            if(this.playerPos > -1 && this.isMoving == false){
+                this.playerPos -= 1;
 
-                obj.body.velocity.x = obj.speed * -1;
-                obj.moveLeft = true;
-                obj.isMoving = true;
+                this.body.velocity.x = this.speed * -1;
+                this.moveLeft = true;
+                this.isMoving = true;
             }
         }
         else if(dir == "right"){
-            if(obj.playerPos < 1 && obj.isMoving == false){
+            if(this.playerPos < 1 && this.isMoving == false){
                 obj.playerPos += 1;
 
-                obj.body.velocity.x = obj.speed;
-                obj.moveRight = true;
-                obj.isMoving = true;
+                this.body.velocity.x = this.speed;
+                this.moveRight = true;
+                this.isMoving = true;
             }
         }
     }
