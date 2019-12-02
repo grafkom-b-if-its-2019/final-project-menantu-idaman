@@ -5,7 +5,6 @@ class Player extends Cube{
     moveLeft = false;
     isMoving = false;
     playerPos = 0;
-    socket = io();
 
     contactNormal = new CANNON.Vec3(); // Normal in the contact, pointing *out* of whatever the player touched
     upAxis = new CANNON.Vec3(0,1,0);
@@ -23,10 +22,6 @@ class Player extends Cube{
         document.addEventListener( 'keyup', this.OnKeyUp.bind(null, this), false );
 
         this.body.addEventListener("collide", this.OnCollisionEnter.bind(null, this));
-
-        this.socket.on("dir", function(msg) {
-            console.log(msg);
-        });
     }
 
     OnCollisionEnter(obj, event){

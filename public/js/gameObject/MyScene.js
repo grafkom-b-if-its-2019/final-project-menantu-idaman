@@ -5,6 +5,7 @@ class MyScene{
     hierarchy = {};
     timeStep = 1/60;
     isGameOver = false;
+    socket = io();
 
     constructor(){
         this.InitScene();
@@ -29,6 +30,9 @@ class MyScene{
         this.sun.castShadow = true;
         this.sun.intensity = 1;
         this.scene.add(this.sun);
+        this.socket.on("dir", function(msg) {
+            console.log(msg);
+        });
     }
 
     InitWorld(){
