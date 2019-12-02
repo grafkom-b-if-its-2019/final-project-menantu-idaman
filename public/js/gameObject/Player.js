@@ -1,5 +1,3 @@
-var io = require('socket.io')(http);
-
 class Player extends Cube{
     speed = 10;
     xPoint = 2;
@@ -26,11 +24,9 @@ class Player extends Cube{
 
         this.body.addEventListener("collide", this.OnCollisionEnter.bind(null, this));
 
-        this.socket.on("dir", this.Move(msg));
-    }
-
-    Move(dir){
-        console.log(dir);
+        this.socket.on("dir", function(msg) {
+            console.log(msg);
+        });
     }
 
     OnCollisionEnter(obj, event){

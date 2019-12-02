@@ -18,9 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Socket setup
 var io = socket(server);
 // var io = require('../..')(server);
-
 io.on('connection', function(socket){
-    console.log("someone connected");
+    console.log("someone connected " + socket.id);
     socket.on("direction", function(msg){
         socket.broadcast.emit("dir", msg);
         console.log("dir: " + msg);
