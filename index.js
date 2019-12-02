@@ -20,6 +20,7 @@ var io = socket(server);
 // var io = require('../..')(server);
 
 io.on('connection', function(socket){
+    console.log("someone connected");
     socket.on("direction", function(msg){
         console.log("dir: " + msg);
     });
