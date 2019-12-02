@@ -88,7 +88,7 @@ class Player extends Cube{
         }
         else if(dir == "right"){
             if(this.playerPos < 1 && this.isMoving == false){
-                obj.playerPos += 1;
+                this.playerPos += 1;
 
                 this.body.velocity.x = this.speed;
                 this.moveRight = true;
