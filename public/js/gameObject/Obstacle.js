@@ -8,6 +8,17 @@ class Obstacle extends Cube{
         this.scene = data.scene;
     }
 
+    InitGeom(){
+        var _data = this.data;
+        this.geometry = new THREE.BoxGeometry(_data.width, _data.height, _data.depth);
+    }
+
+    InitMat(){
+        var _data = this.data;
+        var texture = new THREE.TextureLoader().load( 'js/gameObject/textures/crate.gif' );
+        this.material = new THREE.MeshBasicMaterial({map: texture});
+    }
+
     Update(){
         this.Move();
 
