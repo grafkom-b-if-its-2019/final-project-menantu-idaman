@@ -4,23 +4,18 @@ var socket =  require('socket.io');
 // App Setup
 var app = express();
 var port = process.env.PORT || 3000;
-
 var path = require('path');
 var server = require('http').createServer(app);
-server.listen(port,function(){
-    console.log('listening request on port ' + port);
-});
+var io = socket(server);
 
+server.listen(port,() => {  console.log('listening request on port ' + port);   });
 
 // Routing
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Socket setup
-var io = socket(server);
-// var io = require('../..')(server);
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
     console.log("someone connected " + socket.id);
-    socket.on("direction", function(msg){
+    socket.on("direction", (msg) => {
         socket.broadcast.emit("dir", msg);
         console.log("dir: " + msg);
     });
