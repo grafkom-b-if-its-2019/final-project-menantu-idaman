@@ -112,6 +112,16 @@ class MyScene{
     }
 
     RestartScene(){
+        this.score = document.getElementById("score").innerHTML;
+        this.highScore = document.getElementById("highScore").innerHTML;
+
+        this.score = parseInt(this.score);
+        this.highScore = parseInt(this.highScore);
+
+        if(this.score > this.highScore){
+            this.highScore = this.score;
+        }
+
         for(var key in this.hierarchy){
             var obj = this.hierarchy[key];
             if(key == "ObstacleSpawner"){
@@ -126,6 +136,9 @@ class MyScene{
 
         this.score = document.getElementById("score");
         this.score.innerHTML = '0';
+
+        this.highScoreElem = document.getElementById("highScore");
+        this.highScoreElem.innerHTML = this.highScore.toString();
 
         this.InitHierarchy();
         
