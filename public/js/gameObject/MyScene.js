@@ -3,7 +3,7 @@ class MyScene{
     camNearClip = 0.1;
     camFarClip = 1000;
     hierarchy = {};
-    timeStep = 1/144;
+    timeStep = 1/60;
     isGameOver = false;
     socket = io();
     gameState = undefined;
@@ -39,7 +39,7 @@ class MyScene{
     InitWorld(){
         this.world = new CANNON.World();
 
-        this.world.gravity.set(0, -30, 0);
+        this.world.gravity.set(0, -60, 0);
         this.world.broadphase = new CANNON.NaiveBroadphase();
         this.world.solver.iterations = 10;
     }
