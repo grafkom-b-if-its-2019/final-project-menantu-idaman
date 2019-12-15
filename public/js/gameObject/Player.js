@@ -34,7 +34,6 @@ class Player extends Cube {
         obj.scale.set(0.3, 0.3, -0.3);
 
         that.mixer = new THREE.AnimationMixer(obj);
-        var mixer = new THREE.AnimationMixer(obj);
 
         that.gltfData = gltb;
         that.mesh = obj;

@@ -6,6 +6,7 @@ class MyScene{
     timeStep = 1/144;
     isGameOver = false;
     socket = io();
+    gameState = undefined;
 
     constructor(){
         this.InitScene();
@@ -15,8 +16,6 @@ class MyScene{
         var w = myCanvas.offsetWidth;
         this.renderer = new THREE.WebGLRenderer({canvas: myCanvas});
         this.renderer.setSize(w, h);
-
-        // document.body.appendChild(this.renderer.domElement);
     }
 
     InitScene(){
@@ -53,6 +52,8 @@ class MyScene{
     }
 
     InitHierarchy() {
+        console.log("lol");
+
         this.hierarchy["Player"] = new Player({width: 1, height: 1, depth: 1, position: new THREE.Vector3(0, 0, 0), mass: 1, color: 0xff0000, friction: 0.0, scene: this});
         this.hierarchy["Ground"] = new Cube({width: 6, height: 0.5, depth: 100, position: new THREE.Vector3(0, -1, -45), mass: 0, color: 0x1f1f1f, friction: 0.0});
 
@@ -87,7 +88,7 @@ class MyScene{
             this.renderer.render(this.scene, this.mainCamera);
         }
         else{
-            this.RestartScene();
+            this.DeleteScene();
         }
     }
 
@@ -113,7 +114,11 @@ class MyScene{
         this.isGameOver = true;
     }
 
-    RestartScene(){
+    CheckGameOver(){
+        return this.isGameOver;
+    }
+
+    DeleteScene(){
         this.score = document.getElementById("score").innerHTML;
         this.highScore = document.getElementById("highScore").innerHTML;
 
@@ -136,11 +141,13 @@ class MyScene{
             }
         }
 
-        this.score = document.getElementById("score");
-        this.score.innerHTML = '0';
-
         this.highScoreElem = document.getElementById("highScore");
         this.highScoreElem.innerHTML = this.highScore.toString();
+    }
+
+    RestartScene(){
+        this.score = document.getElementById("score");
+        this.score.innerHTML = '0';
 
         this.InitHierarchy();
         

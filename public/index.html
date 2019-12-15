@@ -38,18 +38,58 @@
 <body>
     <!-- <iframe src="assets/audios/videoplayback.mp3" allow="autoplay" id="audio" style="display:none"></iframe> -->
 
-    <audio autoplay loop>
+    <!-- <audio autoplay loop>
         <source src="assets/audios/videoplayback.mp3" type="audio/mpeg">
         <source src="assets/audios/videoplayback.ogg" type="audio/ogg">
         Your browser does not support the audio element.
-    </audio>
+    </audio> -->
+
+    
+
+    <div class="contents" style="width:100%; height:100%;">
+        <div id="opening">
+            <p>
+                Ini Game Title
+            </p>
+        </div>
+
+        <div id="gameScreen" style="width: 100%; height: 100%; display: none;">
+            <div id="gameState" style="width: 0%; height: 0%;">0</div>
+
+            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+
+            <div style="overflow: hidden; position: absolute; left: 46%;">
+                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
+                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
+            </div>
+
+            <canvas id="myCanvas" style="width: 100%; height: 100%;"></canvas>
+            <script type="text/javascript" src="main.js"></script>
+        </div>
+
+        <div id="credits" style="display: none;">
+            <p>
+                Habib tampan was here
+            </p>
+        </div>
+
+        <div id="howToPlay" style="display: none;">
+            <p>
+                <ol>
+                    <li>Minta app ke habib</li>
+                    <li>Install terus buka</li>
+                    <li>Coba-coba swipe sendiri dah sana</li>
+                </ol>
+            </p>
+        </div>
+    </div>
 
     <div class="meny">
         <h2>Main Menu</h2>
         <ul>
-            <li><a href="#">Play</a></li>
-            <li><a href="#">How to Play</a></li>
-            <li><a href="#">Credits</a></li>
+            <li><button onclick="Play()">Play</button></li>
+            <li><button onclick="HowToPlay()">How To Play</button></li>
+            <li><button onclick="Credit()">Credits</button></li>
             <li><a href="#">Exit</a></li>
             <br>
             <br>
@@ -64,23 +104,36 @@
 
     <div class="meny-arrow"></div>
 
-    <div class="contents" style="width:100%; height:100%;">
-        <div class="gameScreen" style="width: 100%; height: 100%;">
-            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+    <script>
+        function Play(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("gameScreen").style.display = "block";
+            var check = parseInt(state.innerHTML);
+            if(check == 0){
+                Init();
+            }
+            else{
+                if(scene.CheckGameOver() == true)
+                    Restart();
+            }
+        }
 
-            <div style="overflow: hidden; position: absolute; left: 46%;">
-                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
-                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
-            </div>
+        function Credit(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "block";
+            document.getElementById("gameScreen").style.display = "none";
+        }
 
-            <canvas id="myCanvas" style="width: 100%; height: 100%;"></canvas>
-            <script type="text/javascript" src="main.js"></script>
-        </div>
-
-        <!-- <div class="howToPlay">
-
-        </div> -->
-    </div>
+        function HowToPlay(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "block";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("gameScreen").style.display = "none";
+        }
+    </script>
 
     <script src="js/meny.js"></script>
     <script>
