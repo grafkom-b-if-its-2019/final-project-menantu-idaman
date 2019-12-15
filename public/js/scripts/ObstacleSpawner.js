@@ -24,7 +24,11 @@ class ObstacleSpawner extends GameBehavior {
 
     Instantiate(myScene, scale, position, object) {
         var gamble = Math.floor(Math.random() * 3);
-        // gamble = 0;
+        var speedX = document.getElementById("score").innerHTML;
+        speedX = parseFloat(speedX);
+        if(speedX < 30){
+            speedX = 30;
+        }
 
         if (gamble == 0) {
             var index = object.index;
@@ -38,7 +42,7 @@ class ObstacleSpawner extends GameBehavior {
 
             position.x = xPos;
 
-            this.origin = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, 30), friction: 0.0, name: stringName, scene: myScene });
+            this.origin = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, speedX), friction: 0.0, name: stringName, scene: myScene });
 
             myScene.Hierarchy[stringName] = this.origin;
 
@@ -71,7 +75,7 @@ class ObstacleSpawner extends GameBehavior {
 
                 position.x = xBruh[i];
 
-                this.origin[i] = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, 30), friction: 0.0, name: stringName, scene: myScene });
+                this.origin[i] = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, speedX), friction: 0.0, name: stringName, scene: myScene });
 
                 myScene.Hierarchy[stringName] = this.origin[i];
 
@@ -92,7 +96,7 @@ class ObstacleSpawner extends GameBehavior {
 
                 position.x = xBruh[i];
 
-                this.origin[i] = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, 30), friction: 0.0, name: stringName, scene: myScene });
+                this.origin[i] = new Obstacle({ width: scale.x, height: scale.y, depth: scale.z, position: position, mass: 1, color: 0xff0000, speed: new CANNON.Vec3(0, 0, speedX), friction: 0.0, name: stringName, scene: myScene });
 
                 myScene.Hierarchy[stringName] = this.origin[i];
 

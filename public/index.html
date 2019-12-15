@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Three JS</title>
+    <title>Habib Tampan</title>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script type="text/javascript" src="js/libs/three.min.js"></script>
@@ -44,13 +44,64 @@
         Your browser does not support the audio element.
     </audio>
 
+    <div class="contents" style="width:100%; height:100%;">
+        <div id="opening">
+            <p>
+                Ini Game Title<br>
+                <br>
+                <br>
+                <br>
+                NARUTO THEME BABY YEAH!!!!
+            </p>
+        </div>
+
+        <div id="gameScreen" style="width: 100%; height: 100%; display: none;">
+            <div id="gameState" style="width: 0%; height: 0%;">0</div>
+
+            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+
+            <div style="overflow: hidden; position: absolute; left: 46%;">
+                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
+                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
+            </div>
+
+            <canvas id="myCanvas" style="width: 100%; height: 100%; background-image: url('2109 (1).jpg'); background-repeat: no-repeat;"></canvas>
+            <script type="text/javascript" src="main.js"></script>
+        </div>
+
+        <div id="credits" style="display: none;">
+            <p>
+                Habib tampan was here
+            </p>
+        </div>
+
+        <div id="howToPlay" style="display: none;">
+            <p>
+                <ol>
+                    <li>Minta app ke habib</li>
+                    <li>Install terus buka</li>
+                    <li>Coba-coba swipe sendiri dah sana</li>
+                </ol>
+            </p>
+        </div>
+
+        <div id="exit" style="display: none;">
+            <p>
+                E goblog ini web app ngapain di exit.<br>
+                <br>
+                Oh iya bisa exit tab ya.<br>
+                Yaudah lah ya close sendiri.
+            </p>
+        </div>
+    </div>
+
     <div class="meny">
         <h2>Main Menu</h2>
         <ul>
-            <li><a href="#">Play</a></li>
-            <li><a href="#">How to Play</a></li>
-            <li><a href="#">Credits</a></li>
-            <li><a href="#">Exit</a></li>
+            <li><button onclick="Play()">Play</button></li>
+            <li><button onclick="HowToPlay()">How To Play</button></li>
+            <li><button onclick="Credit()">Credits</button></li>
+            <li><button onclick="Exit()">Exit</button></li>
             <br>
             <br>
             <br>
@@ -64,23 +115,47 @@
 
     <div class="meny-arrow"></div>
 
-    <div class="contents" style="width:100%; height:100%;">
-        <div class="gameScreen" style="width: 100%; height: 100%;">
-            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+    <script>
+        function Play(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "block";
+            var check = parseInt(state.innerHTML);
+            if(check == 0){
+                Init();
+            }
+            else{
+                if(scene.CheckGameOver() == true)
+                    Restart();
+            }
+        }
 
-            <div style="overflow: hidden; position: absolute; left: 46%;">
-                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
-                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
-            </div>
+        function Credit(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "block";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "none";
+        }
 
-            <canvas id="myCanvas" style="width: 100%; height: 100%;"></canvas>
-            <script type="text/javascript" src="main.js"></script>
-        </div>
+        function HowToPlay(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "block";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "none";
+        }
 
-        <!-- <div class="howToPlay">
-
-        </div> -->
-    </div>
+        function Exit(){
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "block";
+            document.getElementById("gameScreen").style.display = "none";
+        }
+    </script>
 
     <script src="js/meny.js"></script>
     <script>

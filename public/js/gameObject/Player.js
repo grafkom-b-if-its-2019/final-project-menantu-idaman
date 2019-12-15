@@ -1,5 +1,5 @@
 class Player extends Cube {
-    speed = 10;
+    speed = 15;
     xPoint = 2;
     moveRight = false;
     moveLeft = false;
@@ -9,7 +9,7 @@ class Player extends Cube {
     contactNormal = new CANNON.Vec3(); // Normal in the contact, pointing *out* of whatever the player touched
     upAxis = new CANNON.Vec3(0, 1, 0);
     onGround = true;
-    jumpForce = 10;
+    jumpForce = 15;
     posOffset = new CANNON.Vec3(0, 0, 3);
 
     constructor(_data) {
@@ -34,7 +34,6 @@ class Player extends Cube {
         obj.scale.set(0.3, 0.3, -0.3);
 
         that.mixer = new THREE.AnimationMixer(obj);
-        var mixer = new THREE.AnimationMixer(obj);
 
         that.gltfData = gltb;
         that.mesh = obj;
@@ -92,7 +91,7 @@ class Player extends Cube {
                 this.mixer.clipAction(this.gltfData.animations[6]).play();
             }
 
-            this.mixer.update(0.007);
+            this.mixer.update(0.02);
 
             if (this.position.y < -1) {
                 this.scene.GameOver();
