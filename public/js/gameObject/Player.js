@@ -63,6 +63,10 @@ class Player extends Cube{
             }
         }
 
+        if(this.position.y < -1){
+            this.scene.GameOver();
+        }
+
         this.position.copy(this.body.position);
 
         this.mesh.position.copy(this.position);

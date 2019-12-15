@@ -6,6 +6,7 @@ class Obstacle extends Cube{
         this.speed = data.speed;
         this.name = data.name;
         this.scene = data.scene;
+        
     }
 
     InitGeom(){
@@ -33,6 +34,11 @@ class Obstacle extends Cube{
     }
 
     RemoveObject(){
+        this.score = document.getElementById("score").innerHTML;
+        this.score = parseInt(this.score);
+        this.score += 1;
+        this.scoreElem = document.getElementById("score");
+        this.scoreElem.innerHTML = this.score.toString();
         this.scene.RemoveObject(this.name, this.mesh, this.body);
     }
 

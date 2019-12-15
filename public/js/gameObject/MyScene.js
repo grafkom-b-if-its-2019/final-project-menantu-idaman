@@ -124,6 +124,9 @@ class MyScene{
             }
         }
 
+        this.score = document.getElementById("score");
+        this.score.innerHTML = '0';
+
         this.InitHierarchy();
         
         this.isGameOver = false;
