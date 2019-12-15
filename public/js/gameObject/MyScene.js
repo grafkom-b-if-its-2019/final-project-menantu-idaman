@@ -10,11 +10,13 @@ class MyScene{
     constructor(){
         this.InitScene();
         this.InitWorld();
+        var myCanvas = document.getElementById("myCanvas");
+        var h = myCanvas.offsetHeight;
+        var w = myCanvas.offsetWidth;
+        this.renderer = new THREE.WebGLRenderer({canvas: myCanvas});
+        this.renderer.setSize(w, h);
 
-        this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-        document.body.appendChild(this.renderer.domElement);
+        // document.body.appendChild(this.renderer.domElement);
     }
 
     InitScene(){
