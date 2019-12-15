@@ -3,7 +3,7 @@ class MyScene{
     camNearClip = 0.1;
     camFarClip = 1000;
     hierarchy = {};
-    timeStep = 1/60;
+    timeStep = 1/144;
     isGameOver = false;
     socket = io();
 
@@ -57,6 +57,8 @@ class MyScene{
         this.hierarchy["Ground"] = new Cube({width: 6, height: 0.5, depth: 100, position: new THREE.Vector3(0, -1, -45), mass: 0, color: 0x1f1f1f, friction: 0.0});
 
         this.hierarchy["ObstacleSpawner"] = new ObstacleSpawner({scene: this, scale: new THREE.Vector3(1, 1 ,1), position: new THREE.Vector3(2, - 0.25, -90), friction: 0.0});
+
+        // this.hierarchy["Test"] = new Robot({scene: this});
         
         for(var key in this.hierarchy){
             var obj = this.hierarchy[key];

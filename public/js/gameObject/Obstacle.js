@@ -6,7 +6,7 @@ class Obstacle extends Cube{
         this.speed = data.speed;
         this.name = data.name;
         this.scene = data.scene;
-        
+
     }
 
     InitGeom(){

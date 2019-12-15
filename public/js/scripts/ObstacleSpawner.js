@@ -24,6 +24,7 @@ class ObstacleSpawner extends GameBehavior {
 
     Instantiate(myScene, scale, position, object) {
         var gamble = Math.floor(Math.random() * 3);
+        // gamble = 0;
 
         if (gamble == 0) {
             var index = object.index;
