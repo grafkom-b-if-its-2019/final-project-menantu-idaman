@@ -14,8 +14,9 @@ class MyScene{
         var myCanvas = document.getElementById("myCanvas");
         var h = myCanvas.offsetHeight;
         var w = myCanvas.offsetWidth;
-        this.renderer = new THREE.WebGLRenderer({canvas: myCanvas});
+        this.renderer = new THREE.WebGLRenderer({canvas: myCanvas, antialias: false, alpha: true});
         this.renderer.setSize(w, h);
+        this.renderer.setClearColor(0x000000, 0);
     }
 
     InitScene(){
