@@ -3,6 +3,8 @@ import {StyleSheet, SafeAreaView, FlatList, View, Text, Button, Animated} from '
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import io from 'socket.io-client'
 
+import {  } from 'react-native-gesture-handler/'
+
 const style = StyleSheet.create({
     container : {
         flex: 1,
@@ -29,16 +31,11 @@ export default class App extends React.Component
             backgroundColor: '#fff'
           };
         
-      }
-
-      sendDir(dir)
-      {
-        this.socket.emit('direction', dir);
-      }
-      
-      componentDidMount()
-      {
-        this.socket.emit('direction', 'right');
+        this.onSwipeUp = this.onSwipeUp.bind(this);
+        this.onSwipeDown = this.onSwipeDown.bind(this);
+        this.onSwipeLeft = this.onSwipeLeft.bind(this);
+        this.onSwipeRight = this.onSwipeRight.bind(this);
+        
       }
     
       onSwipeUp(gestureState) {
@@ -70,11 +67,12 @@ export default class App extends React.Component
         };
     
         return (
+
           <GestureRecognizer
-            onSwipeUp={ this.onSwipeUp.bind(this) }
-            onSwipeDown={ this.onSwipeDown.bind(this) }
-            onSwipeLeft={ this.onSwipeLeft.bind(this) }
-            onSwipeRight={ this.onSwipeRight.bind(this) }
+            onSwipeUp={ this.onSwipeUp }
+            onSwipeDown={ this.onSwipeDown }
+            onSwipeLeft={ this.onSwipeLeft }
+            onSwipeRight={ this.onSwipeRight }
             config={config}
             style={{
               flex: 1,
