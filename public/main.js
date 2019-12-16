@@ -1,15 +1,21 @@
 var scene;
 var stat;
+var state = document.getElementById("gameState");
 
-Init();
+// Init();
 
 function Init(){
+    state.innerHTML = 1;
     scene = new MyScene();
     scene.InitHierarchy();
 
     stat = InitStats();
 
     Update();
+}
+
+function Restart(){
+    scene.RestartScene();
 }
 
 function InitStats() {

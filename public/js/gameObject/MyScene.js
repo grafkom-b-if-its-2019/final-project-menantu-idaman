@@ -6,6 +6,7 @@ class MyScene{
     timeStep = 1/60;
     isGameOver = false;
     socket = io();
+    gameState = undefined;
 
     constructor(){
         this.InitScene();
@@ -13,10 +14,9 @@ class MyScene{
         var myCanvas = document.getElementById("myCanvas");
         var h = myCanvas.offsetHeight;
         var w = myCanvas.offsetWidth;
-        this.renderer = new THREE.WebGLRenderer({canvas: myCanvas});
+        this.renderer = new THREE.WebGLRenderer({canvas: myCanvas, antialias: false, alpha: true});
         this.renderer.setSize(w, h);
-
-        // document.body.appendChild(this.renderer.domElement);
+        this.renderer.setClearColor(0x000000, 0);
     }
 
     InitScene(){
@@ -40,7 +40,7 @@ class MyScene{
     InitWorld(){
         this.world = new CANNON.World();
 
-        this.world.gravity.set(0, -30, 0);
+        this.world.gravity.set(0, -60, 0);
         this.world.broadphase = new CANNON.NaiveBroadphase();
         this.world.solver.iterations = 10;
     }
@@ -53,10 +53,14 @@ class MyScene{
     }
 
     InitHierarchy() {
+        console.log("lol");
+
         this.hierarchy["Player"] = new Player({width: 1, height: 1, depth: 1, position: new THREE.Vector3(0, 0, 0), mass: 1, color: 0xff0000, friction: 0.0, scene: this});
         this.hierarchy["Ground"] = new Cube({width: 6, height: 0.5, depth: 100, position: new THREE.Vector3(0, -1, -45), mass: 0, color: 0x1f1f1f, friction: 0.0});
 
         this.hierarchy["ObstacleSpawner"] = new ObstacleSpawner({scene: this, scale: new THREE.Vector3(1, 1 ,1), position: new THREE.Vector3(2, - 0.25, -90), friction: 0.0});
+
+        // this.hierarchy["Test"] = new Robot({scene: this});
         
         for(var key in this.hierarchy){
             var obj = this.hierarchy[key];
@@ -85,7 +89,7 @@ class MyScene{
             this.renderer.render(this.scene, this.mainCamera);
         }
         else{
-            this.RestartScene();
+            this.DeleteScene();
         }
     }
 
@@ -111,7 +115,11 @@ class MyScene{
         this.isGameOver = true;
     }
 
-    RestartScene(){
+    CheckGameOver(){
+        return this.isGameOver;
+    }
+
+    DeleteScene(){
         this.score = document.getElementById("score").innerHTML;
         this.highScore = document.getElementById("highScore").innerHTML;
 
@@ -134,11 +142,13 @@ class MyScene{
             }
         }
 
-        this.score = document.getElementById("score");
-        this.score.innerHTML = '0';
-
         this.highScoreElem = document.getElementById("highScore");
         this.highScoreElem.innerHTML = this.highScore.toString();
+    }
+
+    RestartScene(){
+        this.score = document.getElementById("score");
+        this.score.innerHTML = '0';
 
         this.InitHierarchy();
         

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Three JS</title>
+    <title>Habib Tampan</title>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script type="text/javascript" src="js/libs/three.min.js"></script>
@@ -16,9 +16,16 @@
     <script type="text/javascript" src="js/libs/GameObject.js"></script>
     <script type="text/javascript" src="js/libs/GameBehavior.js"></script>
 
+    <script type="text/javascript" src="js/libs/loader/GLTFLoader.js"></script>
+    <script type="text/javascript" src="js/libs/loader/DDSLoader.js"></script>
+    <script type="text/javascript" src="js/libs/loader/DRACOLoader.js"></script>
+    <script type="text/javascript" src="js/libs/loader/RGBELoader.js"></script>
+    <script type="text/javascript" src="js/libs/loader/EquirectangularToCubeGenerator.js"></script>
+
     <script type="text/javascript" src="js/gameObject/Cube.js"></script>
     <script type="text/javascript" src="js/gameObject/Obstacle.js"></script>
     <script type="text/javascript" src="js/gameObject/Player.js"></script>
+    <script type="text/javascript" src="js/gameObject/testObj.js"></script>
 
     <script type="text/javascript" src="js/scripts/ObstacleSpawner.js"></script>
 
@@ -29,13 +36,97 @@
 </head>
 
 <body>
+    <!-- <iframe src="assets/audios/videoplayback.mp3" allow="autoplay" id="audio" style="display:none"></iframe> -->
+
+    <audio autoplay loop>
+        <source src="assets/audios/videoplayback.mp3" type="audio/mpeg">
+        <source src="assets/audios/videoplayback.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="contents" style="width:100%; height:100%;">
+
+        <div id="opening">
+            <article>
+                <h1>About Our Game</h1>
+                <p>
+                    <br>
+                    Nama Game : a​R​e yo​U​ i​N​ pain?
+                    <br>
+                    Genre : Endless runner
+                    <br>
+                    Competitive Mode : Single Player
+                    <br>
+                    <br>
+                    "a​R​e yo​U i​N pain? adalah permainan 3d endless runner. Main
+                    objective dari permainan ini adalah pemain mendapatkan ​skor
+                    setinggi-tingginya​. Pemain harus menghindari penghalang yang muncul
+                    dalam game agar tidak gameover. Akan ada beberapa power up untuk
+                    menambah dinamika permainan"
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </p>
+                <small>
+                    Created by kelompok "menantu idaman"
+                </small>
+            </article>
+        </div>
+
+        <div id="gameScreen" style="width: 100%; height: 100%; display: none;">
+            <div id="gameState" style="width: 0%; height: 0%;">0</div>
+
+            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+
+            <div style="overflow: hidden; position: absolute; left: 46%;">
+                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
+                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
+            </div>
+
+            <canvas id="myCanvas"
+                style="width: 100%; height: 100%; background-image: url('2109 (1).jpg'); background-repeat: no-repeat;"></canvas>
+            <script type="text/javascript" src="main.js"></script>
+        </div>
+
+        <div id="credits" style="display: none;">
+            <p>
+                Game ini dibuat oleh kelompok "Menantu Idaman"
+                <br>
+                Anggota :
+                <li> Nur Muhammad Husnul Habib Y. - 05111740000094 </li>
+                <li> Furqan Alieyuddin - 05111740000124 </li>
+                <li> Ahmad Firdaus - 05111740000147 </li>
+                <li> Kevin Ashil F. - 05111740000178 </li>
+                <li> Wildan Ghieffarie B. - 05111740000184 </li>
+            </p>
+        </div>
+
+        <div id="howToPlay" style="display: none;">
+            <p>
+                <ol>
+                    <li>Minta app ke habib</li>
+                    <li>Install terus buka</li>
+                    <li>Buka link habibtampan.azurewebsites.net </li>
+                    <li>Coba-coba swipe sendiri dah sana</li>
+                </ol>
+            </p>
+        </div>
+
+        <div id="exit" style="display: none;">
+            <p>
+                Tutup tab saja kalo mau exit
+            </p>
+        </div>
+    </div>
+
     <div class="meny">
         <h2>Main Menu</h2>
         <ul>
-            <li><a href="#">Play</a></li>
-            <li><a href="#">How to Play</a></li>
-            <li><a href="#">Credits</a></li>
-            <li><a href="#">Exit</a></li>
+            <li><button onclick="Play()">Play</button></li>
+            <li><button onclick="HowToPlay()">How To Play</button></li>
+            <li><button onclick="Credit()">Credits</button></li>
+            <li><button onclick="Exit()">Exit</button></li>
             <br>
             <br>
             <br>
@@ -49,23 +140,47 @@
 
     <div class="meny-arrow"></div>
 
-    <div class="contents" style="width:100%; height:100%;">
-        <div class="gameScreen" style="width: 100%; height: 100%;">
-            <div id="Stats-output" style="right: 100px; position: absolute;"></div>
+    <script>
+        function Play() {
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "block";
+            var check = parseInt(state.innerHTML);
+            if (check == 0) {
+                Init();
+            }
+            else {
+                if (scene.CheckGameOver() == true)
+                    Restart();
+            }
+        }
 
-            <div style="overflow: hidden; position: absolute; left: 46%;">
-                <div style="float: left; padding: 5px; font-size: xx-large;">Score : </div>
-                <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
-            </div>
+        function Credit() {
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "block";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "none";
+        }
 
-            <canvas id="myCanvas" style="width: 100%; height: 100%;"></canvas>
-            <script type="text/javascript" src="main.js"></script>
-        </div>
+        function HowToPlay() {
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "block";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "none";
+            document.getElementById("gameScreen").style.display = "none";
+        }
 
-        <!-- <div class="howToPlay">
-
-        </div> -->
-    </div>
+        function Exit() {
+            document.getElementById("opening").style.display = "none";
+            document.getElementById("howToPlay").style.display = "none";
+            document.getElementById("credits").style.display = "none";
+            document.getElementById("exit").style.display = "block";
+            document.getElementById("gameScreen").style.display = "none";
+        }
+    </script>
 
     <script src="js/meny.js"></script>
     <script>
