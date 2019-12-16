@@ -45,34 +45,34 @@
     </audio>
 
     <div class="contents" style="width:100%; height:100%;">
-        
-            <div class="opening">            
-                <article>
-                    <h1>About Our Game</h1>           
-                    <p>
-                        <br>
-                        Nama Game : a​R​e yo​U​ i​N​ pain?
-                        <br>
-                        Genre : Endless runner
-                        <br>
-                        Competitive Mode : Single Player
-                        <br>
-                        <br>
-                        "a​R​e yo​U i​N pain? adalah permainan 3d endless runner. Main
-                        objective dari permainan ini adalah pemain mendapatkan ​skor
-                        setinggi-tingginya​. Pemain harus menghindari penghalang yang muncul
-                        dalam game agar tidak gameover. Akan ada beberapa power up untuk
-                        menambah dinamika permainan"
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                    </p>
-                    <small>
-                        Created by kelompok "menantu idaman"
-                    </small>
-                </article>
-            </div>
+
+        <div id="opening">
+            <article>
+                <h1>About Our Game</h1>
+                <p>
+                    <br>
+                    Nama Game : a​R​e yo​U​ i​N​ pain?
+                    <br>
+                    Genre : Endless runner
+                    <br>
+                    Competitive Mode : Single Player
+                    <br>
+                    <br>
+                    "a​R​e yo​U i​N pain? adalah permainan 3d endless runner. Main
+                    objective dari permainan ini adalah pemain mendapatkan ​skor
+                    setinggi-tingginya​. Pemain harus menghindari penghalang yang muncul
+                    dalam game agar tidak gameover. Akan ada beberapa power up untuk
+                    menambah dinamika permainan"
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </p>
+                <small>
+                    Created by kelompok "menantu idaman"
+                </small>
+            </article>
+        </div>
 
         <div id="gameScreen" style="width: 100%; height: 100%; display: none;">
             <div id="gameState" style="width: 0%; height: 0%;">0</div>
@@ -84,7 +84,8 @@
                 <div id="score" style="float: left; padding: 5px; font-size: xx-large;">0</div>
             </div>
 
-            <canvas id="myCanvas" style="width: 100%; height: 100%; background-image: url('2109 (1).jpg'); background-repeat: no-repeat;"></canvas>
+            <canvas id="myCanvas"
+                style="width: 100%; height: 100%; background-image: url('2109 (1).jpg'); background-repeat: no-repeat;"></canvas>
             <script type="text/javascript" src="main.js"></script>
         </div>
 
@@ -93,11 +94,11 @@
                 Game ini dibuat oleh kelompok "Menantu Idaman"
                 <br>
                 Anggota :
-                <li> Nur Muhammad Husnul Habib Y.   - 05111740000094 </li>
-                <li> Furqan Alieyuddin              - 05111740000124 </li>
-                <li> Ahmad Firdaus                  - 05111740000147 </li>
-                <li> Kevin Ashil F.                 - 05111740000178 </li>
-                <li> Wildan Ghieffarie B.           - 05111740000184 </li>
+                <li> Nur Muhammad Husnul Habib Y. - 05111740000094 </li>
+                <li> Furqan Alieyuddin - 05111740000124 </li>
+                <li> Ahmad Firdaus - 05111740000147 </li>
+                <li> Kevin Ashil F. - 05111740000178 </li>
+                <li> Wildan Ghieffarie B. - 05111740000184 </li>
             </p>
         </div>
 
@@ -109,6 +110,12 @@
                     <li>Buka link habibtampan.azurewebsites.net </li>
                     <li>Coba-coba swipe sendiri dah sana</li>
                 </ol>
+            </p>
+        </div>
+
+        <div id="exit" style="display: none;">
+            <p>
+                Tutup tab saja kalo mau exit
             </p>
         </div>
     </div>
@@ -134,23 +141,23 @@
     <div class="meny-arrow"></div>
 
     <script>
-        function Play(){
+        function Play() {
             document.getElementById("opening").style.display = "none";
             document.getElementById("howToPlay").style.display = "none";
             document.getElementById("credits").style.display = "none";
             document.getElementById("exit").style.display = "none";
             document.getElementById("gameScreen").style.display = "block";
             var check = parseInt(state.innerHTML);
-            if(check == 0){
+            if (check == 0) {
                 Init();
             }
-            else{
-                if(scene.CheckGameOver() == true)
+            else {
+                if (scene.CheckGameOver() == true)
                     Restart();
             }
         }
 
-        function Credit(){
+        function Credit() {
             document.getElementById("opening").style.display = "none";
             document.getElementById("howToPlay").style.display = "none";
             document.getElementById("credits").style.display = "block";
@@ -158,7 +165,7 @@
             document.getElementById("gameScreen").style.display = "none";
         }
 
-        function HowToPlay(){
+        function HowToPlay() {
             document.getElementById("opening").style.display = "none";
             document.getElementById("howToPlay").style.display = "block";
             document.getElementById("credits").style.display = "none";
@@ -166,7 +173,7 @@
             document.getElementById("gameScreen").style.display = "none";
         }
 
-        function Exit(){
+        function Exit() {
             document.getElementById("opening").style.display = "none";
             document.getElementById("howToPlay").style.display = "none";
             document.getElementById("credits").style.display = "none";
